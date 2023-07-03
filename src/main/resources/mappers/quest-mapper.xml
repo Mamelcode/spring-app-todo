@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="quest">
+	<!-- 퀘스트 랜덤으로 가져오기 -->
+	<select id="findQuest" resultType="quest">
+		SELECT * FROM (
+			SELECT * FROM QUESTS
+			WHERE END_DATE &lt;= TO_CHAR(SYSDATE+7,'YYYYMMDD')
+			ORDER BY DBMS_RANDOM.VALUE
+		) WHERE ROWNUM &lt; 3
+	</select>
+	<update id="update" parameterType="quest">
+		UPDATE QUESTS SET JOIN_CNT = #{joinCnt}
+		WHERE ID = #{id}
+	</update>
+	<select id="findById" resultType="quest">
+		SELECT * FROM QUESTS WHERE
+		Id = #{id}
+	</select>
+</mapper>
