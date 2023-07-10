@@ -16,8 +16,13 @@
 		<h2>목표 설정</h2>
 		<form action="/todos/create-task" method="post">
 			<div class="mb-3">
-				<label for="exampleInputEmail1" class="form-label">날짜</label> 
-				<input type="date" class="form-control" name="targetDate"
+				<label for="exampleInputEmail1" class="form-label">시작날짜</label> 
+				<input type="datetime-local" class="form-control" name="startDate"
+					id="exampleInputEmail1" aria-describedby="emailHelp">
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">종료날짜</label> 
+				<input type="datetime-local" class="form-control" name="endDate"
 					id="exampleInputEmail1" aria-describedby="emailHelp">
 			</div>
 			<div class="mb-3">

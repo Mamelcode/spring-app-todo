@@ -2,7 +2,7 @@ package org.edupoll.repository;
 
 import java.util.List;
 
-import org.edupoll.model.Quest;
+import org.edupoll.model.entity.Quest;
 
 public interface QuestRepository {
 	public List<Quest> findQuest();

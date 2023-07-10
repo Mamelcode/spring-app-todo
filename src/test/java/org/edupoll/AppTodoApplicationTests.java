@@ -2,9 +2,9 @@ package org.edupoll;
 
 import java.util.List;
 
-import org.edupoll.model.Todo;
+import org.edupoll.model.entity.Todo;
 import org.edupoll.repository.TodoRepository;
-import org.edupoll.service.AuthService;
+import org.edupoll.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +16,7 @@ class AppTodoApplicationTests {
 	TodoRepository todoRepository;
 	
 	@Autowired
-	AuthService authService;
+	UserService authService;
 	
 	@Test
 	void contextLoads() {

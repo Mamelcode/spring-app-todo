@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.edupoll.model.Todo;
+import org.edupoll.model.entity.Todo;
 import org.edupoll.repository.TodoRepository;
 import org.springframework.stereotype.Repository;
 
 import jakarta.annotation.PostConstruct;
 
-@Repository
 public class InMemoryTodoRepository implements TodoRepository{
 
 	List<Todo> list;
@@ -18,9 +17,9 @@ public class InMemoryTodoRepository implements TodoRepository{
 	@PostConstruct
 	public void init() {
 		list = new ArrayList<>();
-		list.add(new Todo("3rqw212r", "user", "자바공부", new Date(123, 6, 1), null));
-		list.add(new Todo("3rqw2fvd", "master", "웹공부", new Date(123, 7, 1), null));
-		list.add(new Todo("frq2t342", "master", "sql공부", new Date(123, 8, 1), null));
+//		list.add(new Todo("3rqw212r", "user", "자바공부", new Date(123, 6, 1), null));
+//		list.add(new Todo("3rqw2fvd", "master", "웹공부", new Date(123, 7, 1), null));
+//		list.add(new Todo("frq2t342", "master", "sql공부", new Date(123, 8, 1), null));
 	}
 	
 	@Override

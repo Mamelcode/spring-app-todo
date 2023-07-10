@@ -28,10 +28,16 @@
 		<form action="/todos/update-task" method="post">
 			<input type="hidden" name="id" value="${todo.id}">
 			<div class="mb-3">
-				<label for="exampleInputEmail1" class="form-label">날짜</label> 
-				<input type="date" class="form-control" name="targetDate"
+				<label for="exampleInputEmail1" class="form-label">시작 날짜</label> 
+				<input type="datetime-local" class="form-control" name="startDate"
 					id="exampleInputEmail1" aria-describedby="emailHelp"
-					value='<fmt:formatDate value="${todo.targetDate}" pattern="yyyy-MM-dd"/>'>
+					value="${todo.startDate}"/>					
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">종료 날짜</label> 
+				<input type="datetime-local" class="form-control" name="endDate"
+					id="exampleInputEmail1" aria-describedby="emailHelp"
+					value="${todo.endDate}"/>
 			</div>
 			<div class="mb-3">
 				<label for="exampleInputPassword1" class="form-label">목표</label>

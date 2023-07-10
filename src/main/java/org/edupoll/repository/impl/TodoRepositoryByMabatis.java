@@ -3,15 +3,14 @@ package org.edupoll.repository.impl;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.edupoll.model.Todo;
+import org.edupoll.model.entity.Todo;
 import org.edupoll.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Primary
-public class OracleTodoRepositoryByMabatis implements TodoRepository {
+public class TodoRepositoryByMabatis implements TodoRepository {
 	
 	@Autowired
 	SqlSession sqlSession;

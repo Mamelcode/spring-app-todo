@@ -2,8 +2,10 @@ package org.edupoll.comtroller;
 
 import java.util.List;
 
-import org.edupoll.model.Quest;
-import org.edupoll.model.Todo;
+import org.edupoll.model.dto.TodoRequestDTO;
+import org.edupoll.model.dto.TodoResponseDTO;
+import org.edupoll.model.entity.Quest;
+import org.edupoll.model.entity.Todo;
 import org.edupoll.service.QuestService;
 import org.edupoll.service.TodoService;
 import org.slf4j.Logger;
@@ -32,21 +34,13 @@ public class TodoController {
 	@Autowired
 	QuestService questService;
 	
-	@GetMapping
+	@GetMapping("")
 	public String gotoTodoList(@SessionAttribute String logonId, ModelMap model) {
-		List<Todo> todos = todoService.getTodos(logonId);
-		List<Quest> quest = questService.getQuest();
-		
-		for(Todo t : todos) {
-			for(Quest q : quest) {
-				if(t.getDescription().equals(q.getDescription())) {
-					q.setJoin(true);
-				}
-			}
-		}
+		List<TodoResponseDTO> todos = todoService.getTodos(logonId);		
+//		List<Quest> quest = questService.getQuest();
 		
 		model.put("todos", todos);
-		model.put("quest", quest);
+//		model.put("quest", quest);
 		
 		return "todos/list";
 	}
@@ -57,12 +51,12 @@ public class TodoController {
 	}
 	
 	@PostMapping("/create-task")
-	public String createTask(@Valid Todo todo, BindingResult result, Model model, 
+	public String createTask(@Valid TodoRequestDTO todo, BindingResult result, Model model, 
 			@SessionAttribute String logonId) {
-		logger.info("Todo`s {}, {}", todo.toString());
+		logger.info("Todo`s {}", todo.toString());
 		if(result.hasErrors()) {
 			model.addAttribute("msg", "유효하지 않습니다.");
-			return "todos/create";			
+			return "todos/create";		
 		}else {
 			boolean rst = todoService.addNewTodo(todo, logonId);
 			if(rst) {
@@ -90,14 +84,14 @@ public class TodoController {
 	public String updateView(String todoId, Model model) {
 		logger.info("Todo`s {}, {}", todoId);
 		
-		Todo todo = todoService.getTodo(todoId);
+		TodoResponseDTO todo = todoService.getTodo(todoId);
 		model.addAttribute("todo", todo);
 		
 		return "todos/update";
 	}
 	
 	@PostMapping("/update-task")
-	public String updateTask(@Valid Todo todo, BindingResult result, 
+	public String updateTask(@Valid TodoRequestDTO todo, BindingResult result, 
 			@SessionAttribute String logonId, Model model) {
 		logger.info("Todo`s {}, {}", todo.toString());
 		if(result.hasErrors()) {

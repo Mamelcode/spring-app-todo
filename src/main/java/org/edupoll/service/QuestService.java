@@ -2,7 +2,7 @@ package org.edupoll.service;
 
 import java.util.List;
 
-import org.edupoll.model.Quest;
+import org.edupoll.model.entity.Quest;
 import org.edupoll.repository.QuestRepository;
 import org.edupoll.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class QuestService {
 	
-	@Autowired
+//	@Autowired
 	QuestRepository questRepository;
 	
-	@Autowired
+//	@Autowired
 	TodoRepository todoRepository;
 	
 	public List<Quest> getQuest() {

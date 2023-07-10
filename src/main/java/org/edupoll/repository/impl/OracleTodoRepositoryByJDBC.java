@@ -2,8 +2,7 @@ package org.edupoll.repository.impl;
 
 import java.util.List;
 
-
-import org.edupoll.model.Todo;
+import org.edupoll.model.entity.Todo;
 import org.edupoll.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -11,18 +10,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository
 public class OracleTodoRepositoryByJDBC implements TodoRepository {
 	
-	@Autowired
+//	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
 	@Override
 	public void create(Todo todo) {
 		String sql = "INSERT INTO TODOS VALUES(?,?,?,?,?)";
-		jdbcTemplate.update(sql
-				,todo.getId(), todo.getOwner(), todo.getDescription(), todo.getTargetDate()
-				,todo.getDone());
+//		jdbcTemplate.update(sql
+//				,todo.getId(), todo.getOwner(), todo.getDescription(), todo.getTargetDate()
+//				,todo.getDone());
 	}
 	
 	@Override
@@ -56,7 +54,7 @@ public class OracleTodoRepositoryByJDBC implements TodoRepository {
 			todo.setDescription(rs.getString("description"));
 			todo.setDone(rs.getString("done"));
 			todo.setOwner(rs.getString("owner"));
-			todo.setTargetDate(rs.getDate("target_Date"));
+//			todo.setTargetDate(rs.getDate("target_Date"));
 			return todo;
 		};
 	}

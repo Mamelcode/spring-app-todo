@@ -1,9 +1,12 @@
 package org.edupoll.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.edupoll.model.Todo;
+import org.edupoll.model.dto.TodoRequestDTO;
+import org.edupoll.model.dto.TodoResponseDTO;
+import org.edupoll.model.entity.Todo;
 import org.edupoll.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,21 +19,27 @@ public class TodoService {
 	TodoRepository todoRepository;
 	
 	@Transactional
-	public boolean addNewTodo(Todo todo, String logonId) {
+	public boolean addNewTodo(TodoRequestDTO dto, String logonId) {
 		String id = UUID.randomUUID().toString().split("-")[0];
 		Todo found = todoRepository.findById(id);
 		if(found == null) {
-			todo.setId(id);
-			todo.setOwner(logonId);
-			todoRepository.create(todo);
+			todoRepository.create(new Todo(id, logonId, dto));
 			return true;
 		}else {
+			System.out.println("todo 생성 found != null");
 			return false;
 		}
 	}
 
-	public List<Todo> getTodos(String logonId) {
-		return todoRepository.findByOwner(logonId);
+	public List<TodoResponseDTO> getTodos(String logonId) {
+		List<Todo> todos = todoRepository.findByOwner(logonId);
+		
+		List<TodoResponseDTO> finds = new ArrayList<>();
+		for(Todo t : todos) {
+			finds.add(new TodoResponseDTO(t));
+		}
+		
+		return finds;
 	}
 	
 	@Transactional
@@ -48,18 +57,19 @@ public class TodoService {
 		}
 	}
 
-	public Todo getTodo(String todoId) {
-		return todoRepository.findById(todoId);
+	// 특정 todo 가져오기
+	public TodoResponseDTO getTodo(String todoId) {
+		return new TodoResponseDTO(todoRepository.findById(todoId));
 	}
 	
 	@Transactional
-	public boolean updateTodo(Todo todo, String userId) {
+	public boolean updateTodo(TodoRequestDTO todo, String userId) {
 		if(todo == null) {
 			return false;
 		}else {
 			Todo t = todoRepository.findById(todo.getId());
 			if(t.getOwner().equals(userId)) {
-				todoRepository.update(todo);
+				todoRepository.update(new Todo(todo));
 				return true;
 			}else {
 				return false;

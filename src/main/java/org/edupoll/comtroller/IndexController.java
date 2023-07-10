@@ -19,7 +19,7 @@ public class IndexController {
 		logger.info("logonid = "+ logonId);
 		
 		if(logonId == null) {
-			return "redirect:/auth";
+			return "redirect:/user/login";
 		}else {
 			return "redirect:/todos";
 		}

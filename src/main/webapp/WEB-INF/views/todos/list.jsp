@@ -56,12 +56,11 @@
 				<c:forEach items="${todos}" var="one">
 					<tr>
 						<td>${one.description}</td>
-						<td>~ <fmt:formatDate value="${one.targetDate}"
-								pattern="yyyy-MM-dd" /></td>
+						<td>${one.startDate} ~ ${one.endDate}</td>
 						<td>
 							<c:choose>
-								<c:when test="${empty one.done}">
-									<a href="/todos/success?done=success&id=${one.id}" class="btn btn-success">목표달성</a>
+								<c:when test="${one.done eq 'N'}">
+									<a href="/todos/success?done=Y&id=${one.id}" class="btn btn-success">목표달성</a>
 								</c:when>
 								<c:otherwise>
 									<a class="btn btn-secondary">완료됨</a>
