@@ -1,15 +1,19 @@
 package org.edupoll.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class TodoRequestDTO {
 	
 	String id;
 	@NotNull
+	@NotBlank
 	String description;
 	@NotNull
+	@NotBlank
 	String startDate;
 	@NotNull
+	@NotBlank
 	String endDate;
 	
 	

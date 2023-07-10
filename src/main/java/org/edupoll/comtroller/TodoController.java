@@ -11,6 +11,7 @@ import org.edupoll.service.TodoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.validation.Valid;
@@ -55,14 +57,13 @@ public class TodoController {
 			@SessionAttribute String logonId) {
 		logger.info("Todo`s {}", todo.toString());
 		if(result.hasErrors()) {
-			model.addAttribute("msg", "유효하지 않습니다.");
-			return "todos/create";		
+			return "redirect:/todos?error=1";		
 		}else {
 			boolean rst = todoService.addNewTodo(todo, logonId);
 			if(rst) {
 				return "redirect:/todos";
 			}else {
-				return "todos/create";
+				return "redirect:/todos?error=1";
 			}
 		}
 	}
@@ -88,6 +89,15 @@ public class TodoController {
 		model.addAttribute("todo", todo);
 		
 		return "todos/update";
+	}
+	
+	@GetMapping("/gettodo")
+	@ResponseBody
+	public ResponseEntity<TodoResponseDTO> getTodoHandle(String id) {
+		
+		TodoResponseDTO todo = todoService.getTodo(id);
+		
+		return ResponseEntity.ok(todo);
 	}
 	
 	@PostMapping("/update-task")
