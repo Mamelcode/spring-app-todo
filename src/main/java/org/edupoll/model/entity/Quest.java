@@ -7,9 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class Quest {
-	Integer id; // 기본키
+	private Integer id; // 기본키
 	
-	String description; // 내용
+	private String description; // 내용
 	
 	private LocalDateTime startDate; // 시작날짜
 	

@@ -4,21 +4,25 @@
 	
 	<!-- 퀘스트 랜덤으로 가져오기 -->
 	
-	<!--  
-	<select id="findQuest" resultType="quest">
-		SELECT * FROM (
-			SELECT * FROM QUESTS
-			WHERE END_DATE &lt;= TO_CHAR(SYSDATE+7,'YYYYMMDD')
-			ORDER BY DBMS_RANDOM.VALUE
-		) WHERE ROWNUM &lt; 3
+	<select id="findRnd3Quest" resultType="quest">
+		SELECT P.*, IFNULL(JOIN_CNT, 0) AS JOIN_CNT FROM QUESTS P LEFT JOIN JOIN_CNT L ON P.ID = L.ID 
+		UNION SELECT P.*, JOIN_CNT FROM QUESTS P RIGHT JOIN JOIN_CNT L ON P.ID = L.ID 
+		WHERE END_DATE > NOW() ORDER BY RAND() LIMIT 3
 	</select>
-	<update id="update" parameterType="quest">
-		UPDATE QUESTS SET JOIN_CNT = #{joinCnt}
-		WHERE ID = #{id}
-	</update>
-	<select id="findById" resultType="quest">
-		SELECT * FROM QUESTS WHERE
-		Id = #{id}
+	
+	<select id="findById" resultType="quest" parameterType="Integer">
+		SELECT * FROM QUESTS WHERE ID=#{id}
 	</select>
-	-->
+	
+	<select id="findByIdAndUserId" resultType="quest" parameterType="hashmap">
+		SELECT * FROM QUEST_JOIN WHERE ID=#{id} AND USER_ID=#{userId}
+	</select>
+	
+	<insert id="joinQuest" parameterType="QuestJoin">
+		INSERT INTO QUEST_JOIN VALUES(#{id}, #{userId})
+	</insert>
+	
+	<delete id="deleteJoinQuest" parameterType="QuestJoin">
+		DELETE FROM QUEST_JOIN WHERE ID=#{id} AND USER_ID=#{userId}
+	</delete>
 </mapper>

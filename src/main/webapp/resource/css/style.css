@@ -21,6 +21,84 @@ body {
   /* -webkit-text-stroke: 5px #fff; */
 }
 
+/* 로그인 시작 */
+.res_wrap {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.res_wrap .res_dox {
+  padding: 20px;
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 5px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
+}
+
+.res_wrap .res_dox h2 {
+  font-size: 30px;
+  color: #000;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.res_wrap .res_dox p {
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+.res_wrap .res_dox .login_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.res_wrap .res_dox .login_form input {
+  height: 45px;
+  border-radius: 3px;
+  padding-left: 10px;
+  background: #ddd;
+}
+
+.res_wrap .res_dox .login_form button {
+  margin-top: 50px;
+  height: 50px;
+  background: #424874;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 20px;
+}
+
+.login_noid {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login_noid span {
+  color: #000;
+}
+
+.login_noid a {
+  color: #000;
+}
+
+.login_noid a i {
+  margin-right: 5px;
+}
+
+.login_noid a:hover {
+  text-decoration: underline;
+}
+/* 로그인 끝 */
+
 .event_area{
   margin-top: 50px;
 }
@@ -326,16 +404,16 @@ body {
 }
 
 .task_btn button.modify{
-  border: 1px solid blue;
-  background: blue;
-  color: #fff;
+  border: 1px solid #F9ED69;
+  background: #F9ED69;
+  color: #000;
   font-size: 20px;
   margin-right: 5px;
 }
 
 .task_btn button.modify:hover{
   background: #fff;
-  color: blue;
+  color: #F9ED69;
 }
 
 

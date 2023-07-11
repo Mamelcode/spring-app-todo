@@ -2,6 +2,7 @@ package org.edupoll.model.entity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 import org.edupoll.model.dto.TodoRequestDTO;
 
@@ -16,7 +17,7 @@ public class Todo {
 	private LocalDateTime startDate; // 시작날짜
 	
 	private LocalDateTime endDate; // 종료날짜
-	
+		
 	private String done; // 여부
 	
 	public Todo() {
@@ -39,6 +40,16 @@ public class Todo {
 		this.description = dto.getDescription();
 		this.startDate = LocalDateTime.parse(dto.getStartDate(), DateTimeFormatter.ISO_DATE_TIME);
 		this.endDate = LocalDateTime.parse(dto.getEndDate(), DateTimeFormatter.ISO_DATE_TIME);
+	}
+	
+	public Todo(Quest quest, String owner) {
+		super();
+		this.id = UUID.randomUUID().toString().split("-")[0];
+		this.owner = owner;
+		this.description = quest.getDescription();
+		this.startDate = quest.getStartDate();
+		this.endDate = quest.getEndDate();
+		this.done = "N";
 	}
 
 	@Override

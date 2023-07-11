@@ -8,21 +8,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Todo</title>
+	<link href="https://webfontworld.github.io/cookierun/CookieRun.css" rel="stylesheet">
+	<link rel="stylesheet" href="/resource/css/initial.css" />
+	<link href="https://webfontworld.github.io/SCoreDream/SCoreDream.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="/resource/css/style.css" >
 </head>
-<body>
-	<h2>회원가입</h2>
-	<form action="/user/join" method="post">
-		<c:if test="${error}">
-			${error}
-		</c:if>
-		<h3>아이디</h3>
-		<input type="text" name="id" placeholder="아이디..">
-		<h3>비밀번호</h3>
-		<input type="password" name="password" placeholder="비밀번호..">
-		<button type="submit">회원가입</button>
-	</form>
-	<p>
-		<a href="/user/login">로그인 하러가기</a>
-	</p>
+<body class="login_bg">
+  <div class="wrap">
+    <h2>TODO LIST</h2>
+
+    
+    <div class="res_wrap">
+      <div class="res_dox">
+        <h2>회원가입</h2>
+        <form class="login_form" action="/user/join" method="post">
+          <p>아이디</p>
+          <input type="text" name="id" placeholder="아이디(필수)">
+          <p>비밀번호</p>
+          <input type="password" name="password" placeholder="비밀번호(필수)">
+
+          <button type="submit" name="button">회원가입</button>
+        </form>
+
+        <div class="login_noid">
+          <span>아이디가 있으신가요?</span> <a href="/user/login"><i class="fa-solid fa-arrow-up-right-from-square"></i>로그인</a>
+        </div>
+        
+      </div>
+    </div>
+    
+   </div>
+
 </body>
 </html>

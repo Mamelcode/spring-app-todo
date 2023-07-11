@@ -2,9 +2,9 @@ package org.edupoll.comtroller;
 
 import java.util.List;
 
+import org.edupoll.model.dto.QuestResponseDTO;
 import org.edupoll.model.dto.TodoRequestDTO;
 import org.edupoll.model.dto.TodoResponseDTO;
-import org.edupoll.model.entity.Quest;
 import org.edupoll.model.entity.Todo;
 import org.edupoll.service.QuestService;
 import org.edupoll.service.TodoService;
@@ -39,10 +39,10 @@ public class TodoController {
 	@GetMapping("")
 	public String gotoTodoList(@SessionAttribute String logonId, ModelMap model) {
 		List<TodoResponseDTO> todos = todoService.getTodos(logonId);		
-//		List<Quest> quest = questService.getQuest();
+		List<QuestResponseDTO> quests = questService.getQuest(logonId);
 		
 		model.put("todos", todos);
-//		model.put("quest", quest);
+		model.put("quest", quests);
 		
 		return "todos/list";
 	}

@@ -12,6 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   <!-- 팝업창 관련 -->
+  <link href="https://webfontworld.github.io/cookierun/CookieRun.css" rel="stylesheet">
   <link rel="stylesheet" href="/resource/css/initial.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css" rel="stylesheet">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
@@ -80,7 +81,8 @@
 
 		<!-- 팝업창 관련 -->
 		<div id="modify" class="modal modalbox">
-		    <form id="container" action="/todos/create-task" method="post">
+		    <form id="container" action="/todos/update-task" method="post">
+		    <input type="hidden" name="id" id="modifyId">
 		      <div id="list_add">
 		        <div class="list_info">
 		          <input class="taskInput" type="text" name="description" placeholder="리스트 추가" id="modifyDescription">
@@ -89,7 +91,7 @@
 		            <span><label for="">종료</label><input id="modifyEndDate" class="taskInput" type="datetime-local" name="endDate"></span>
 		          </div>
 		        </div>
-		        <button id="taskAdd">+</button>
+		        <button id="taskAdd"><i class="ri-pencil-line"></i></button>
 		      </div>
 		    </form>
 		</div>
@@ -165,36 +167,25 @@
     <div class="event_area">
       <h3>TODAY QUEST</h3>
       <ul class="event_wrap">
+      <c:forEach items="${quest}" var="q">
         <li>
           <div class="event_title">
-            <h2>산책하기</h2>
-            <p><span>2023.07.10</span> - <span>2023.07.10</span></p>
+            <h2>${q.description}</h2>
+            <p><span>${q.startDate}</span> ~ <span>${q.endDate}</span></p>
           </div>
           <div class="event_people">
-            <p><i class="ri-user-3-line"></i><span>6</span>명</p>
-            <a href="#">참여하기</a>
+            <p><i class="ri-user-3-line"></i><span>${q.joinCnt}</span>명</p>
+            <c:choose>
+	            <c:when test="${q.joined}">
+	            	<a>참여중</a>
+	            </c:when>
+	            <c:otherwise>
+	            	<a href="/quest/join?id=${q.id}">참여하기</a>
+	            </c:otherwise>            	
+            </c:choose>
           </div>
         </li>
-        <li>
-          <div class="event_title">
-            <h2>명상하기</h2>
-            <p><span>2023.07.10</span> - <span>2023.07.10</span></p>
-          </div>
-          <div class="event_people">
-            <p><i class="ri-user-3-line"></i><span>6</span>명</p>
-            <a href="#">참여하기</a>
-          </div>
-        </li>
-        <li>
-          <div class="event_title">
-            <h2>독서하기</h2>
-            <p><span>2023.07.10</span> - <span>2023.07.10</span></p>
-          </div>
-          <div class="event_people">
-            <p><i class="ri-user-3-line"></i><span>6</span>명</p>
-            <a href="#">참여하기</a>
-          </div>
-        </li>
+      </c:forEach>
       </ul>
     </div>
   </div>
@@ -213,6 +204,9 @@
 			document.getElementById('modifyDescription').value = response.description
 			document.getElementById('modifyStartDate').value = response.startDate
 			document.getElementById('modifyEndDate').value = response.endDate
+			document.getElementById('modifyId').value = response.id
+		 }else {
+			 window.alert("정보를 불러오는데 실패하였습니다.")
 		 };
 	 };
   </script>

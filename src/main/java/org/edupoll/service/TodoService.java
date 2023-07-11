@@ -26,7 +26,6 @@ public class TodoService {
 			todoRepository.create(new Todo(id, logonId, dto));
 			return true;
 		}else {
-			System.out.println("todo 생성 found != null");
 			return false;
 		}
 	}
