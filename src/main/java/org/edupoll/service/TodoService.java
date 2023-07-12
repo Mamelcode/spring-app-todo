@@ -1,5 +1,7 @@
 package org.edupoll.service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +37,11 @@ public class TodoService {
 		
 		List<TodoResponseDTO> finds = new ArrayList<>();
 		for(Todo t : todos) {
+			if(Duration.between(LocalDateTime.now(), t.getEndDate()).toMillis() < 0) {
+				t.setDone("P");
+				todoRepository.updateDone(t);
+			}
+			
 			finds.add(new TodoResponseDTO(t));
 		}
 		
