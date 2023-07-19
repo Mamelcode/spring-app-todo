@@ -43,7 +43,7 @@
             <c:if test="${one.done eq 'Y'}"><c:set var="status" value="완료"/></c:if>
             <c:if test="${one.done eq 'P'}"><c:set var="status" value="실패"/></c:if>
               <li>
-                <p>${one.description}<small>(${status})</small></p> <span>${one.startDate} ~ ${one.endDate}</span>
+                <p><c:out value="${one.description}"/><small>(<c:out value="${status}"/>)</small></p> <span><c:out value="${one.startDate}"/> ~ <c:out value="${one.endDate}"/></span>
                 <div class="task_btn">
                   <a href="/todos/delete-task?todoId=${one.id}"><button type="button" name="button" class="delete"><i class="ri-delete-bin-line"></i></button></a>
                 </div>
@@ -62,7 +62,7 @@
           			<c:set var="Nemp" value="true"/>
 			            <ul id="task_list">
 			              <li>
-			                <p>${two.description}</p> <span>${two.startDate} ~ ${two.endDate}</span>
+			                <p><c:out value="${two.description}"/></p> <span><c:out value="${two.startDate}"/> ~ <c:out value="${two.endDate}"/></span>
 			                <div class="task_btn">
 			                  <a href="#modify" rel="modal:open" id="modifyClick${var.count}" data-id="${two.id}" onclick="onclickHandle(id)"><button type="button" name="button" class="modify"><i class="ri-pencil-line"></i></button></a>
 			                  <a href="/todos/success?done=Y&id=${two.id}"><button type="button" name="button" class="success"><i class="ri-check-line"></i></button></a>
@@ -105,7 +105,7 @@
 	          			<c:set var="Yemp" value="true"/>
 			            <ul id="task_list">
 			              <li>
-			                <p>${three.description}</p> <span>${three.startDate} ~ ${three.endDate}</span>
+			                <p><c:out value="${three.description}"/></p> <span><c:out value="${three.startDate}"/> ~ <c:out value="${three.endDate}"/></span>
 			                <div class="task_btn">
 			                  <a href="/todos/delete-task?todoId=${three.id}"><button type="button" name="button" class="delete"><i class="ri-delete-bin-line"></i></button></a>
 			                </div>
@@ -129,7 +129,7 @@
 	          			<c:set var="Pemp" value="true"/>
 			            <ul id="task_list">
 			              <li>
-			                <p>${three.description}</p> <span>${three.startDate} ~ ${three.endDate}</span>
+			                <p><c:out value="${three.description}"/></p> <span><c:out value="${three.startDate}"/> ~ <c:out value="${three.endDate}"/></span>
 			                <div class="task_btn">
 			                  <a href="/todos/delete-task?todoId=${three.id}"><button type="button" name="button" class="delete"><i class="ri-delete-bin-line"></i></button></a>
 			                </div>
@@ -170,11 +170,11 @@
       <c:forEach items="${quest}" var="q">
         <li>
           <div class="event_title">
-            <h2>${q.description}</h2>
-            <p><span>${q.startDate}</span> ~ <span>${q.endDate}</span></p>
+            <h2><c:out value="${q.description}"/></h2>
+            <p><span><c:out value="${q.startDate}"/></span> ~ <span><c:out value="${q.endDate}"/></span></p>
           </div>
           <div class="event_people">
-            <p><i class="ri-user-3-line"></i><span>${q.joinCnt}</span>명</p>
+            <p><i class="ri-user-3-line"></i><span><c:out value="${q.joinCnt}"/></span>명</p>
             <c:choose>
 	            <c:when test="${q.joined}">
 	            	<a>참여중</a>
